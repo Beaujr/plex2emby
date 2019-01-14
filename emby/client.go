@@ -7,9 +7,11 @@ import (
 "io/ioutil"
 	"encoding/json"
 	url2 "net/url"
+	"crypto/tls"
 )
 
 func NewClient(url string, apikey string, userId string) Client {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	client := http.Client{Transport:http.DefaultTransport.(*http.Transport), Timeout:time.Second * 10}
 	return Client{client:client, baseURL:url, apiKey:apikey, userId:userId}
 }
