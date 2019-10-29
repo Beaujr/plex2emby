@@ -117,9 +117,9 @@ func(c *Clients) processTVShows (sectionKey string) error {
 
 					for _, plexEpisode := range plexEpisodes {
 						if plexEpisode.ViewCount == "" {
-							fmt.Println(fmt.Sprintf("%s,%s,%s,%s,%s", sectionKey, item.Title, season.Title, plexEpisode.EpisodeNumber, "Unwatched"))
+							fmt.Println(fmt.Sprintf("%s,%s,%s,Episode %s,%s", sectionKey, item.Title, season.Title, plexEpisode.EpisodeNumber, "Unwatched"))
 						} else {
-							fmt.Println(fmt.Sprintf("%s,%s,%s,%s,%s", sectionKey, item.Title, season.Title, plexEpisode.EpisodeNumber, "Watched"))
+							fmt.Println(fmt.Sprintf("%s,%s,%s,Episode %s,%s", sectionKey, item.Title, season.Title, plexEpisode.EpisodeNumber, "Watched"))
 							for _, embyEpisode := range embyEpisodes {
 								plexEpisodeNumber, err := strconv.Atoi(plexEpisode.EpisodeNumber)
 								if err != nil {
@@ -140,7 +140,7 @@ func(c *Clients) processTVShows (sectionKey string) error {
 				}
 			}
 		} else {
-			return fmt.Errorf("%s,%s", item.Title, "NOT FOUND")
+			fmt.Println(fmt.Sprintf("ERROR: %s,%s", item.Title, "NOT FOUND"))
 		}
 	}
 	return nil
